@@ -20,7 +20,8 @@ async function sortearCarta() {
       atributos: {
         ataque: dadosJogador.stats[1].base_stat,
         defesa: dadosJogador.stats[2].base_stat,
-        velocidade: dadosJogador.stats[5].base_stat
+        velocidade: dadosJogador.stats[5].base_stat,
+        vida: dadosJogador.stats[0].base_stat
       }
     };
 
@@ -40,7 +41,9 @@ async function sortearCarta() {
       atributos: {
         ataque: dadosMaquina.stats[1].base_stat,
         defesa: dadosMaquina.stats[2].base_stat,
-        velocidade: dadosMaquina.stats[5].base_stat
+        velocidade: dadosMaquina.stats[5].base_stat,
+        vida: dadosMaquina.stats[0].base_stat
+
       }
     };
 
