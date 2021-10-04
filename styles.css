@@ -44,11 +44,13 @@ button,
   border-color: blue;
   color: #000;
   background-color: #676565;
+  cursor: pointer;
 }
 
 button:disabled {
   background-color: #e1ebec;
   color: gray;
+  cursor: default;
 }
 
 h2 {
