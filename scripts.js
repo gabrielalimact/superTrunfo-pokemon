@@ -104,15 +104,53 @@ var cartas = [
   var cartaMaquina;
   var cartaJogador;
   
-  function sortearCarta() {
-    var numCartaMaquina = parseInt(Math.random() * cartas.length);
-    cartaMaquina = cartas[numCartaMaquina];
-  
-    var numCartaJogador = parseInt(Math.random() * cartas.length);
+  async function sortearCarta() {
+    var numCartaMaquina = parseInt(Math.random() * 150 + 1);
+
+    var numCartaJogador = parseInt(Math.random() * 150 + 1);
     while (numCartaJogador == numCartaMaquina) {
-      numCartaJogador = parseInt(Math.random() * cartas.length);
+      numCartaJogador = parseInt(Math.random() * 150 + 1);
     }
-    cartaJogador = cartas[numCartaJogador];
+
+    let reqJogador = await axios.get("https://pokeapi.co/api/v2/pokemon/" + numCartaJogador);
+    try {
+      let dadosJogador = reqJogador.data;
+      console.log(dadosJogador);
+
+      cartaJogador = {
+        nome: dadosJogador.name,
+        image: dadosJogador.sprites.other["official-artwork"].front_default,
+        atributos: {
+          ataque: dadosJogador.stats[1].base_stat,
+          defesa: dadosJogador.stats[2].base_stat,
+          velocidade: dadosJogador.stats[5].base_stat
+        }
+      };
+
+    } catch (err) {
+      window.alert("deu erro");
+      console.log(err);
+    };
+
+    let reqMaquina = await axios.get("https://pokeapi.co/api/v2/pokemon/" + numCartaMaquina);
+    try {
+      let dadosMaquina = reqMaquina.data;
+      console.log(dadosMaquina);
+
+      cartaMaquina = {
+        nome: dadosMaquina.name,
+        image: dadosMaquina.sprites.other["official-artwork"].front_default,
+        atributos: {
+          ataque: dadosMaquina.stats[1].base_stat,
+          defesa: dadosMaquina.stats[2].base_stat,
+          velocidade: dadosMaquina.stats[5].base_stat
+        }
+      };
+
+    } catch (err) {
+      window.alert("deu erro");
+      console.log(err);
+    };
   
     document.getElementById("btnSortear").disabled = true;
     document.getElementById("btnJogar").disabled = false;
